@@ -11,12 +11,12 @@ const TOTAL_QUESTIONS = 10;
 
 const App = () => {
   // states
-  // const [loading, setLoading] = useState(false);
-  // const [questions, setQuestions] = useState([]);
-  // const [number, setNumber] = useState(0);
-  // const [userAnswers, setUserAnswers] = useState([]);
-  // const [score, setScore] = useState(0);
-  // const [gameOver, setGameOver] = useState(true);
+  const [loading, setLoading] = useState(false);
+  const [questions, setQuestions] = useState([]);
+  const [number, setNumber] = useState(0);
+  const [userAnswers, setUserAnswers] = useState([]);
+  const [score, setScore] = useState(0);
+  const [gameOver, setGameOver] = useState(true);
 
   console.log(fetchQuizQuestions(TOTAL_QUESTIONS, Difficulty.EASY));
   
@@ -43,7 +43,7 @@ const App = () => {
         userAnswer={userAnswers ? userAnswers[number] : undefined}
         callback={checkAnswer}
       /> */}
-      <button className="next" onClick={nextQuestion}></button>
+      <button className="next" onClick={nextQuestion}>next question</button>
     </div>
   );
 };
