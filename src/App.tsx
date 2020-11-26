@@ -88,7 +88,7 @@ const App = () => {
     <>
       <GlobalStyle />
       <Wrapper>
-        <h1>React Quiz</h1>
+        <h1>Quiz Title</h1>
 
         {/* conditionally render start button */}
         {gameOver || userAnswers.length === TOTAL_QUESTIONS ? (

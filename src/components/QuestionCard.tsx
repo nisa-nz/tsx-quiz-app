@@ -3,6 +3,9 @@ import React from "react";
 // types
 import { AnswerObject } from '../App';
 
+// styles
+import { QuestionCardWrapper } from '../App.styles'
+
 type Props = {
   question: string;
   answers: string[];
@@ -20,7 +23,7 @@ const QuestionCard: React.FC<Props> = ({
   questionNum,
   totalQuestions,
 }) => (
-  <div>
+  <QuestionCardWrapper>
     <p className="number">
       question: {questionNum} / {totalQuestions}
     </p>
@@ -36,7 +39,7 @@ const QuestionCard: React.FC<Props> = ({
         </div>
       ))}
     </div>
-  </div>
+  </QuestionCardWrapper>
 );
 
 export default QuestionCard;
