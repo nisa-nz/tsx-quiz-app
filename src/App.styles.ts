@@ -1,5 +1,5 @@
 import styled, { createGlobalStyle } from "styled-components";
-import imgBG from "./img/mi.jpg";
+
 
 export const GlobalStyle = createGlobalStyle`
 
@@ -8,8 +8,7 @@ html {
 }
 
 body {
-    background-image: url(${imgBG});
-    background-size: cover;
+
     margin: 0;
     padding: 0 20px;
     display: flex;
@@ -47,15 +46,6 @@ export const Wrapper = styled.div`
 
   h1 {
     font-size: 6rem;
-    background-image: linear-gradient(180deg, #fff, #f24e04);
-    background-size: 100%;
-    background-clip: text;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    -moz-background-clip: text;
-    -moz-text-fill-color: transparent;
-    filter: drop-shadow(2px 2px #f24e04);
-    text-align: center;
     margin: 2rem;
   }
 `;
