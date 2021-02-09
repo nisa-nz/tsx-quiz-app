@@ -1,17 +1,8 @@
 import React from "react";
 
-// types
-import { AnswerObject } from '../App';
-
-// styles
-import { QuestionCardWrapper } from '../App.styles'
-
 type Props = {
   question: string;
   answers: string[];
-  // correctAnswer: string;
-  // callback: (e: React.MouseEvent<HTMLButtonElement>) => void;
-  // userAnswer: AnswerObject | undefined;
   questionNum: number;
   totalQuestions: number;
 };
@@ -19,28 +10,31 @@ type Props = {
 const QuestionCard: React.FC<Props> = ({
   question,
   answers,
-  // correctAnswer,
-  // callback,
-  // userAnswer,
   questionNum,
   totalQuestions,
 }) => (
-  <QuestionCardWrapper>
-    <p className="number">
-      question: {questionNum} / {totalQuestions}
-    </p>
+  <div className="bg-near-black moon-gray">
+    <dl className="f3 lh-title mv3 bb b--light-green tc pv2">
+      <dt className="dib b">Question:</dt>
+      <dd className="dib ml1 light-red">
+        {questionNum} of {totalQuestions}
+      </dd>
+    </dl>
 
-    <p dangerouslySetInnerHTML={{ __html: question }}></p>
-
-      {answers.map((answer) => (
-        <h4 key={answer}>
+    <article className="pa2 mw9 center">
+      <h1
+        className="f2 bold tc mb3"
+        dangerouslySetInnerHTML={{ __html: question }}
+      ></h1>
+      <ul className="list pl0 mt4 center mw8 ba b--light-red br2">
+        {answers.map((answer) => (
+          <li className="f3 ph3 pv3 bb b--light-red light-green" key={answer}>
             <span dangerouslySetInnerHTML={{ __html: answer }} />
-        </h4>
-      ))}
-
-
- 
-  </QuestionCardWrapper>
+          </li>
+        ))}
+      </ul>
+    </article>
+  </div>
 );
 
 export default QuestionCard;

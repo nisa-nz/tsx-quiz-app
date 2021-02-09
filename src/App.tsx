@@ -3,12 +3,13 @@ import { fetchQuizQuestions } from "./API";
 
 // components
 import QuestionCard from "./components/QuestionCard";
+import Header from "./components/Header";
 
 // types
 import { QuestionState, Difficulty } from "./API";
 
 // styles
-import { GlobalStyle, Wrapper } from "./App.styles";
+import { GlobalStyle } from "./App.styles";
 
 export type AnswerObject = {
   question: string;
@@ -27,7 +28,6 @@ const App = () => {
   const [userAnswers, setUserAnswers] = useState<AnswerObject[]>([]);
   const [showAnswer, setShowAnswer] = useState(false);
   const [showNextBtn, setShowNextBtn] = useState(false);
-  // const [score, setScore] = useState(0);
   const [gameOver, setGameOver] = useState(true);
 
   console.log(questions);
@@ -52,29 +52,6 @@ const App = () => {
     setLoading(false);
   };
 
-  // const checkAnswer = (e: React.MouseEvent<HTMLButtonElement>) => {
-  //   if (!gameOver) {
-  // user answer
-  // const answer = e.currentTarget.value;
-
-  // check user answer against correct answer
-  // const correct = questions[number].correct_answer === answer;
-
-  // add score if correct
-  // if (correct) setScore((prev) => prev + 1);
-
-  // save answer to answer array
-  //     const AnswerObject = {
-  //       question: questions[number].question,
-  //       answer,
-  //       correct,
-  //       correctAnswer: questions[number].correct_answer,
-  //     };
-
-  //     setUserAnswers((prev) => [...prev, AnswerObject]);
-  //   }
-  // };
-
   const revealAnswer = () => {
     setShowAnswer(true);
     setShowNextBtn(true);
@@ -94,57 +71,62 @@ const App = () => {
   };
 
   return (
-    <>
+    <div className="w-100 vh-100 bg-near-black">
       <GlobalStyle />
-      <Wrapper>
-        <h1>NISA Quiz Bowl</h1>
+      <Header />
 
-        {/* conditionally render start button */}
-        {gameOver || userAnswers.length === TOTAL_QUESTIONS ? (
-          <button className="start" onClick={startTrivia}>
-            start
-          </button>
-        ) : null}
+      <div className="db pt6 mb2"></div>
+      {/* conditionally render start button */}
+      {gameOver || userAnswers.length === TOTAL_QUESTIONS ? (
+        <div
+          className="f3 w-50 tc center link br2 ph3 pv2 mb2 near-black bg-light-green pointer dim"
+          onClick={startTrivia}
+        >
+          start
+        </div>
+      ) : null}
 
-        {/* conditionally render score */}
-        {/* {!gameOver ? <p className="score">score: {score}</p> : null} */}
+      {/* conditionally render loading */}
+      {loading && (
+        <p className="f3 w-50 tc center link br2 ph3 pv2 mb2 light-green">
+          loading...
+        </p>
+      )}
 
-        {/* conditionally render loading */}
-        {loading && <p>loading...</p>}
+      {/* conditionally render QuestionCard */}
+      {!loading && !gameOver && (
+        <>
+          <QuestionCard
+            questionNum={number + 1}
+            totalQuestions={TOTAL_QUESTIONS}
+            question={questions[number].question}
+            answers={questions[number].answer}
+          />
+          <div
+            className="f3 w-50 tc center link br2 ph3 pv2 mb2 near-black bg-light-red pointer dim"
+            onClick={revealAnswer}
+          >
+            {" "}
+            show answer{" "}
+          </div>
+        </>
+      )}
 
-        {/* conditionally render QuestionCard */}
-        {!loading && !gameOver && (
-          <>
-            <QuestionCard
-              questionNum={number + 1}
-              totalQuestions={TOTAL_QUESTIONS}
-              question={questions[number].question}
-              answers={questions[number].answer}
-              // correctAnswer={questions[number].correct_answer}
-              // userAnswer={userAnswers ? userAnswers[number] : undefined}
-              // callback={showAnswer}
-            />
+      {/* conditionally render answer */}
+      {!loading && !gameOver && showAnswer && (
+        <h3 className="f1 green tc">{`${questions[number].correct_answer}`}</h3>
+      )}
 
-            <button onClick={revealAnswer}> show answer </button>
-          </>
-        )}
-
-        {/* conditionally render answer */}
-        {!loading &&
-          !gameOver &&
-          showAnswer &&
-          (<h3>{`${questions[number].correct_answer}`}</h3>)}
-
-        {/* conditionally render next button */}
-        {!gameOver &&
-        !loading &&
-        showNextBtn&& (
-          <button className="next" onClick={nextQuestion}>
-            next question
-          </button>
-        )}
-      </Wrapper>
-    </>
+      {/* conditionally render next button */}
+      {!gameOver && !loading && showNextBtn && (
+        <div
+          className="f3 w-50 tc center link br2 ph3 pv2 mb2 near-black bg-light-green pointer dim"
+          onClick={nextQuestion}
+        >
+          next question
+        </div>
+      )}
+    </div>
   );
 };
 
