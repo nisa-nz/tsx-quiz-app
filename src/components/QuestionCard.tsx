@@ -27,8 +27,9 @@ const QuestionCard: React.FC<Props> = ({
         dangerouslySetInnerHTML={{ __html: question }}
       ></h1>
       <ul className="list pl0 mt4 center mw8 ba b--light-red br2">
-        {answers.map((answer) => (
+        {answers.map((answer, idx) => (
           <li className="f3 ph3 pv3 bb b--light-red light-green" key={answer}>
+             <span> {idx} : </span>  
             <span dangerouslySetInnerHTML={{ __html: answer }} />
           </li>
         ))}
