@@ -1,3 +1,5 @@
+[netlify live version](https://goofy-kilby-4b8a86.netlify.app/)
+
 # quiz bowl app
 
 #### tech used :
